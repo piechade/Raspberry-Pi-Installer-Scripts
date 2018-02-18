@@ -197,6 +197,7 @@ GPIOTEST="gpio -g mode $RW_PIN up\n\
 if [ \`gpio -g read $RW_PIN\` -eq 0 ] ; then\n\
 \tmount -o remount,rw \/\n\
 \tmount -o remount,rw \/boot\n\
+\tmount -o remount,rw \/data\n\
 fi\n"
 if [ $INSTALL_RW_JUMPER -ne 0 ]; then
 	apt-get install -y --force-yes wiringpi
@@ -228,7 +229,8 @@ if [ $INSTALL_WATCHDOG -ne 0 ]; then
 	# Additional settings needed on Jessie
 	append1 /lib/systemd/system/watchdog.service "WantedBy" "WantedBy=multi-user.target"
 	systemctl enable watchdog
-	# Set up automatic reboot in sysctl.conf
+	# Set up automatic re
+	in sysctl.conf
 	replaceAppend /etc/sysctl.conf "^.*kernel.panic.*$" "kernel.panic = 10"
 fi
 
